@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.venv-*/
+
+# PyInstaller build output
+build/
+dist/
+*.spec
+
+# Local application data
+backups/

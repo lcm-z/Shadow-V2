@@ -1,0 +1,6 @@
+psutil==7.2.2
+pywebview==6.2.1; sys_platform != "linux"
+pywebview[qt]==6.2.1; sys_platform == "linux"
+PyQt6==6.11.0; sys_platform == "linux"
+PyQt6-WebEngine==6.11.0; sys_platform == "linux"
+QtPy==2.4.3; sys_platform == "linux"
