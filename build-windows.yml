@@ -1,0 +1,43 @@
+name: Build Shadow for Windows
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Preparar Node para verificar a interface
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verificar JavaScript e controles da interface
+        run: |
+          node --check ui/app.js
+          node --test test_ui.cjs
+
+      - name: Compilar Shadow
+        shell: pwsh
+        run: ./build_windows.ps1
+
+      - name: Disponibilizar Shadow.exe para download
+        uses: actions/upload-artifact@v4
+        with:
+          name: Shadow-Windows
+          path: dist/Shadow.exe
+          if-no-files-found: error
+          retention-days: 14

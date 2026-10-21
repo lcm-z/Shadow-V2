@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07030f">
+  <title>Shadow | PC Optimizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Camadas atmosféricas do tema "obsidiana neon". -->
+  <div class="scene" aria-hidden="true">
+    <div class="scene-aurora aurora-one"></div>
+    <div class="scene-aurora aurora-two"></div>
+    <div class="scene-aurora aurora-three"></div>
+    <div class="scene-stars"></div>
+    <div class="scene-grid"></div>
+    <div class="scene-scanlines"></div>
+    <div class="scene-noise"></div>
+    <div class="scene-vignette"></div>
+  </div>
+
+  <!-- Sprite de ícones: traço único, sem dependências externas. -->
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="icon-processes" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="7" cy="6" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="17" cy="18" r="1.6"/></symbol>
+    <symbol id="icon-storage" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.6 3.4 2.8 7.5 2.8s7.5-1.2 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.6 3.4 2.8 7.5 2.8s7.5-1.2 7.5-2.8v-6"/></symbol>
+    <symbol id="icon-cleanup" viewBox="0 0 24 24"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z"/><path d="M18.5 14.5l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9.9-2.6z"/><path d="M4.5 16.5l.6 1.9 1.9.6-1.9.6-.6 1.9-.6-1.9-1.9-.6 1.9-.6.6-1.9z"/></symbol>
+    <symbol id="icon-startup" viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M7.2 5.8a8 8 0 1 0 9.6 0"/><path d="M9 11l3 3 3-3"/></symbol>
+    <symbol id="icon-power" viewBox="0 0 24 24"><path d="M13 2L5 13h6l-1 9 8-11h-6l1-9z"/></symbol>
+    <symbol id="icon-diagnostics" viewBox="0 0 24 24"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><circle cx="12" cy="12" r="3.4"/><path d="M12 7.5v2M12 14.5v2M7.5 12h2M14.5 12h2"/></symbol>
+    <symbol id="icon-games" viewBox="0 0 24 24"><path d="M7.5 8h9A4.5 4.5 0 0 1 21 12.5v2A3.5 3.5 0 0 1 17.5 18c-1.2 0-1.9-.6-2.6-1.4L13.8 15h-3.6l-1.1 1.6C8.4 17.4 7.7 18 6.5 18A3.5 3.5 0 0 1 3 14.5v-2A4.5 4.5 0 0 1 7.5 8z"/><path d="M8 11v4M6 13h4M15.5 12h.01M18 14h.01"/></symbol>
+    <symbol id="icon-performance" viewBox="0 0 24 24"><path d="M3 12h4l2.2-6 4.1 12 2.4-7 1.6 4H21"/><path d="M3 20h18" opacity=".45"/></symbol>
+    <symbol id="icon-network" viewBox="0 0 24 24"><path d="M3.5 9.5a13 13 0 0 1 17 0"/><path d="M6.5 13a8.6 8.6 0 0 1 11 0"/><path d="M9.5 16.4a4 4 0 0 1 5 0"/><circle cx="12" cy="19.5" r="1.1"/></symbol>
+    <symbol id="icon-history" viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1L3.5 8.5"/><path d="M3.5 4v4.5H8"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21a2 2 0 1 1-4 0v-.1A1.7 1.7 0 0 0 8.6 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 8.6a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 8.6 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3a2 2 0 1 1 4 0v.1A1.7 1.7 0 0 0 15 4.6a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 8.6c.1.35.3.7.6 1 .3.28.7.42 1.1.42H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5.98z"/></symbol>
+    <symbol id="icon-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol>
+    <symbol id="icon-ram" viewBox="0 0 24 24"><path d="M3 8h18v8H3z"/><path d="M7 8v8M11 8v8M15 8v8M19 8v8M5 16v3M9 16v3M13 16v3M17 16v3"/></symbol>
+    <symbol id="icon-disk" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 14h18"/><circle cx="17" cy="17" r="1"/><path d="M7 8h6"/></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.6-3 8.1-7 10-4-1.9-7-5.4-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+  </svg>
+
+  <button id="close-app-button" class="window-close-button" type="button" aria-label="Fechar Shadow" title="Fechar Shadow">×</button>
+
+  <!-- Apresentação visual: a análise só começa pelo botão dentro do painel. -->
+  <section id="welcome" class="intro-screen" aria-label="Apresentação do Shadow">
+    <div class="intro-halo" aria-hidden="true"></div>
+    <div class="intro-identity">
+      <div class="intro-emblem" aria-hidden="true">
+        <div class="intro-orbit"></div>
+        <svg class="intro-monogram" viewBox="0 0 160 180" fill="none">
+          <defs>
+            <linearGradient id="intro-violet" x1="30" y1="20" x2="130" y2="165" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#f5eaff"/><stop offset=".45" stop-color="#c299ff"/><stop offset="1" stop-color="#8751ef"/>
+            </linearGradient>
+          </defs>
+          <path class="intro-s-ghost" d="M124 38H63L35 66L122 113L94 142H34"/>
+          <path class="intro-s-stroke" pathLength="1" d="M124 38H63L35 66L122 113L94 142H34"/>
+          <path class="intro-s-highlight" pathLength="1" d="M124 38H63L35 66L122 113L94 142H34"/>
+        </svg>
+        <span class="intro-spark spark-one"></span><span class="intro-spark spark-two"></span><span class="intro-spark spark-three"></span>
+      </div>
+      <h1 class="intro-name">SHADOW</h1>
+      <p class="intro-caption">Seu PC em foco.</p>
+    </div>
+    <button id="intro-skip-button" class="intro-skip" type="button">Pular apresentação <span aria-hidden="true">→</span></button>
+  </section>
+
+  <!-- ============================== DASHBOARD ============================== -->
+  <main id="dashboard" class="dashboard hidden" tabindex="-1">
+    <header class="topbar">
+      <div class="top-brand">
+        <div class="mini-mark">S</div>
+        <div class="brand-copy"><strong>SHADOW</strong><small>OTIMIZADOR DE PC // V4.0</small></div>
+      </div>
+      <div class="topbar-signal" aria-hidden="true">
+        <span>ATIVIDADE</span>
+        <div class="equalizer"><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div id="system-status" class="system-status"><span class="status-dot"></span> Aguardando análise</div>
+      <button id="refresh-button" class="secondary-button" type="button"><span class="refresh-icon" aria-hidden="true">↻</span> Analisar sistema</button>
+    </header>
+
+    <nav class="dashboard-nav" aria-label="Navegação do painel">
+      <button id="nav-pin-button" type="button" aria-label="Fixar menu aberto" title="Fixar menu aberto" aria-pressed="false">
+        <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16M13 9l3 3-3 3"/></svg><span class="nav-label">Fixar menu aberto</span>
+      </button>
+      <span class="nav-group-label">MONITOR</span>
+      <button type="button" data-view="overview" aria-label="Visão geral" title="Visão geral" aria-current="page"><svg class="nav-icon"><use href="#icon-grid"></use></svg><span class="nav-label">Visão geral</span><span class="nav-index">01</span></button>
+      <button type="button" data-view="processes" aria-label="Processos" title="Processos"><svg class="nav-icon"><use href="#icon-processes"></use></svg><span class="nav-label">Processos</span><span class="nav-index">02</span></button>
+      <button type="button" data-view="storage" aria-label="Armazenamento" title="Armazenamento"><svg class="nav-icon"><use href="#icon-storage"></use></svg><span class="nav-label">Armazenamento</span><span class="nav-index">03</span></button>
+      <button type="button" data-view="diagnostics" aria-label="Diagnóstico completo" title="Diagnóstico completo"><svg class="nav-icon"><use href="#icon-diagnostics"></use></svg><span class="nav-label">Diagnóstico</span><span class="nav-index">04</span></button>
+
+      <span class="nav-group-label">OTIMIZAR</span>
+      <button type="button" data-view="cleanup" aria-label="Limpeza" title="Limpeza"><svg class="nav-icon"><use href="#icon-cleanup"></use></svg><span class="nav-label">Limpeza</span><span class="nav-index">05</span></button>
+      <button type="button" data-view="startup" aria-label="Inicialização" title="Inicialização"><svg class="nav-icon"><use href="#icon-startup"></use></svg><span class="nav-label">Inicialização</span><span class="nav-index">06</span></button>
+      <button type="button" data-view="power" aria-label="Energia" title="Energia"><svg class="nav-icon"><use href="#icon-power"></use></svg><span class="nav-label">Energia</span><span class="nav-index">07</span></button>
+
+      <span class="nav-group-label">LABORATÓRIOS</span>
+      <button type="button" data-view="games" aria-label="Gaming Hub" title="Gaming Hub"><svg class="nav-icon"><use href="#icon-games"></use></svg><span class="nav-label">Gaming Hub</span><span class="nav-index">08</span></button>
+      <button type="button" data-view="performance" aria-label="Performance Lab" title="Performance Lab"><svg class="nav-icon"><use href="#icon-performance"></use></svg><span class="nav-label">Performance Lab</span><span class="nav-index">09</span></button>
+      <button type="button" data-view="network" aria-label="Network Lab" title="Network Lab"><svg class="nav-icon"><use href="#icon-network"></use></svg><span class="nav-label">Network Lab</span><span class="nav-index">10</span></button>
+
+      <span class="nav-group-label">SISTEMA</span>
+      <button type="button" data-view="history" aria-label="Histórico e restauração" title="Histórico e restauração"><svg class="nav-icon"><use href="#icon-history"></use></svg><span class="nav-label">Histórico</span><span class="nav-index">11</span></button>
+      <button type="button" data-view="settings" aria-label="Configurações e compatibilidade" title="Configurações e compatibilidade"><svg class="nav-icon"><use href="#icon-settings"></use></svg><span class="nav-label">Configurações</span><span class="nav-index">12</span></button>
+      <div class="nav-foot" aria-hidden="true"><i></i><span>LOCAL</span><b>LOCAL</b></div>
+    </nav>
+
+    <div class="dashboard-main">
+      <!-- ============================ VISÃO GERAL ============================ -->
+      <section class="dashboard-page" data-page="overview" aria-label="Visão geral">
+        <div class="page-heading">
+          <div>
+            <span class="section-kicker">SHADOW // VISÃO GERAL</span>
+            <h1>Painel de desempenho</h1>
+            <p>O que está acontecendo no PC e o que merece atenção.</p>
+          </div>
+          <span class="dashboard-live-label"><i></i> DADOS DO SISTEMA</span>
+        </div>
+
+        <section class="analysis-invitation" aria-label="Analisar sistema">
+          <div>
+            <span class="section-kicker">VOCÊ NO CONTROLE</span>
+            <h2>Conheça o estado do seu PC.</h2>
+            <p>A análise consulta o sistema. Ajustes pedem confirmação. O Shadow não garante mais FPS; limitações de hardware podem exigir troca de peças.</p>
+          </div>
+          <div class="analysis-invitation-actions">
+            <button id="analyze-button" class="primary-button" type="button"><span class="button-label">Analisar sistema</span><span aria-hidden="true">↗</span></button>
+            <button id="intro-replay-button" class="text-link-button" type="button">Rever apresentação</button>
+          </div>
+        </section>
+
+        <section class="content-grid">
+          <article class="panel chart-panel">
+            <div class="panel-heading">
+              <div><span class="section-kicker">ANÁLISE DO COMPUTADOR</span><h2 id="hero-diagnosis-title">Aguardando análise</h2><p id="hero-diagnosis-summary">Clique em Analisar para consultar o uso atual do sistema.</p></div>
+              <button id="live-toggle" class="secondary-button" type="button" disabled><span class="live-toggle-dot"></span> Iniciar ao vivo</button>
+            </div>
+            <div class="performance-main">
+              <div class="score-card">
+                <span class="score-label">FOLGA ATUAL</span>
+                <div class="score-reading"><div id="score-gauge" class="score-gauge"><span id="availability-score">--</span></div><span class="score-denominator">/100</span></div>
+                <p id="score-caption">Aguardando as amostras da análise</p>
+                <button id="score-explain-button" class="text-link-button" type="button">Como calculamos <span aria-hidden="true">↗</span></button>
+              </div>
+              <div class="chart-wrap"><canvas id="resource-chart" aria-label="Histórico recente de uso da CPU e memória"></canvas></div>
+            </div>
+            <div class="chart-legend"><span><i class="legend-cpu"></i> CPU</span><span><i class="legend-ram"></i> RAM</span><small id="chart-range">HISTÓRICO DA ANÁLISE</small></div>
+            <div class="chart-note">O gráfico mostra as amostras da análise atual. Inicie o monitoramento ao vivo para acompanhar novas leituras.</div>
+          </article>
+
+          <article class="panel radar-panel live-stats-panel">
+            <div class="panel-heading"><div><span class="section-kicker">ÚLTIMAS LEITURAS</span><h2>Uso do sistema</h2></div><span class="live-status-pill">SISTEMA</span></div>
+            <div class="live-stat"><span class="live-stat-icon cpu-icon"><svg class="icon"><use href="#icon-cpu"></use></svg></span><span class="live-stat-copy"><strong>CPU</strong><small>Uso do processador</small></span><span class="live-stat-meter"><i id="cpu-meter"></i></span><b id="cpu-value">--%</b></div>
+            <div class="live-stat"><span class="live-stat-icon ram-icon"><svg class="icon"><use href="#icon-ram"></use></svg></span><span class="live-stat-copy"><strong>MEMÓRIA</strong><small id="ram-total">Memória total: -- GB</small></span><span class="live-stat-meter"><i id="ram-meter"></i></span><b id="ram-value">--%</b></div>
+            <div class="live-stat"><span class="live-stat-icon disk-icon"><svg class="icon"><use href="#icon-disk"></use></svg></span><span class="live-stat-copy"><strong>DISCO DO SISTEMA</strong><small id="disk-total">Aguardando unidades</small></span><span class="live-stat-meter"><i id="disk-meter"></i></span><b id="disk-value">--%</b></div>
+            <div class="available-memory">RAM disponível <strong id="available-value">-- GB</strong></div>
+            <div class="live-disk-io">Leitura <strong id="disk-read-rate">-- MB/s</strong><span>·</span> Escrita <strong id="disk-write-rate">-- MB/s</strong></div>
+          </article>
+        </section>
+
+        <section class="quick-actions" aria-label="Acesso rápido">
+          <div class="quick-actions-heading"><div><span class="section-kicker">ACESSO RÁPIDO</span><h2>Ações rápidas</h2></div><span class="quick-actions-hint">SELECIONE UM MÓDULO</span></div>
+          <div class="quick-actions-grid">
+            <button type="button" class="quick-action" data-open-page="processes"><span class="quick-action-icon"><svg class="icon"><use href="#icon-processes"></use></svg></span><span class="quick-action-copy"><strong>Processos</strong><small>Veja os maiores consumidores</small></span><b>↗</b></button>
+            <button type="button" class="quick-action" data-open-page="cleanup"><span class="quick-action-icon"><svg class="icon"><use href="#icon-cleanup"></use></svg></span><span class="quick-action-copy"><strong>Limpeza</strong><small>Revise temporários antigos</small></span><b>↗</b></button>
+            <button type="button" class="quick-action" data-open-page="storage"><span class="quick-action-icon"><svg class="icon"><use href="#icon-storage"></use></svg></span><span class="quick-action-copy"><strong>Armazenamento</strong><small>Confira o espaço em disco</small></span><b>↗</b></button>
+            <button type="button" class="quick-action" data-open-page="power"><span class="quick-action-icon"><svg class="icon"><use href="#icon-power"></use></svg></span><span class="quick-action-copy"><strong>Plano de energia</strong><small>Veja as opções disponíveis</small></span><b>↗</b></button>
+            <button type="button" class="quick-action" data-open-page="games"><span class="quick-action-icon"><svg class="icon"><use href="#icon-games"></use></svg></span><span class="quick-action-copy"><strong>Gaming Hub</strong><small>Perfis e preparação</small></span><b>↗</b></button>
+            <button type="button" class="quick-action" data-open-page="network"><span class="quick-action-icon"><svg class="icon"><use href="#icon-network"></use></svg></span><span class="quick-action-copy"><strong>Network Lab</strong><small>Conexão e latência</small></span><b>↗</b></button>
+          </div>
+        </section>
+
+        <article class="panel telemetry-panel">
+          <div class="panel-heading"><div><span class="section-kicker">SENSORES DISPONÍVEIS</span><h2>GPU e temperaturas</h2><p id="sensor-status">Clique para consultar os sensores deste computador.</p></div><button id="sensor-refresh" type="button" class="secondary-button">Ler sensores</button></div>
+          <ul id="sensor-readings" class="tool-list"></ul><p id="sensor-help" class="settings-note"></p>
+        </article>
+        <section class="content-grid diagnosis-grid">
+          <article class="panel recommendations-panel">
+            <div class="panel-heading"><div><span class="section-kicker">O QUE MERECE ATENÇÃO</span><h2>Recomendações</h2></div><div class="heading-actions"><span id="level-badge" class="level-badge">—</span> <button type="button" class="text-link-button" data-open-page="diagnostics">Relatório ↗</button></div></div>
+            <ul id="recommendation-list" class="recommendation-list"><li>Aguardando leitura do sistema.</li></ul>
+          </article>
+          <article class="panel details-panel overview-process-panel">
+            <div class="panel-heading"><div><span class="section-kicker">VISÃO RÁPIDA</span><h2>Maiores consumidores de RAM</h2></div><button type="button" class="text-link-button" data-open-page="processes">Ver todos ↗</button></div>
+            <ul id="overview-process-list" class="overview-process-list"><li class="empty-state">Os processos aparecerão após a análise.</li></ul>
+          </article>
+        </section>
+      </section>
+
+      <!-- ============================= PROCESSOS ============================= -->
+      <section class="dashboard-page hidden" data-page="processes" aria-label="Processos">
+        <div class="page-heading"><div><span class="section-kicker">SHADOW // PROCESSOS</span><h1>Mapa de processos</h1><p>Escolha um aplicativo e confirme antes de pedir para fechá-lo. Salve seu trabalho primeiro.</p></div><span class="dashboard-live-label"><i></i> RAM / LIVE FEED</span></div>
+        <article class="panel process-panel">
+          <div class="panel-heading"><div><span class="section-kicker">USO DE MEMÓRIA</span><h2>Processos com maior uso de RAM</h2><p>O encerramento é sempre manual, validado e sem força.</p></div></div>
+          <ul id="process-list" class="process-list"><li class="empty-state">Os processos aparecerão após a análise.</li></ul>
+        </article>
+        <section class="panel live-process-panel">
+          <div class="panel-heading"><div><span class="section-kicker">MONITORAMENTO AO VIVO</span><h2>Processos usando recursos agora</h2><p>O monitoramento para quando você clicar em Pausar.</p></div><span id="live-status" class="live-badge"><i></i> PAUSADO</span></div>
+          <div class="live-process-columns">
+            <div><h3>Maior uso de CPU</h3><ul id="live-cpu-list" class="tool-list"><li class="empty-state">Inicie o monitoramento ao vivo.</li></ul></div>
+            <div><h3>Maior uso de RAM</h3><ul id="live-ram-list" class="tool-list"><li class="empty-state">Inicie o monitoramento ao vivo.</li></ul></div>
+          </div>
+        </section>
+      </section>
+
+      <!-- =========================== ARMAZENAMENTO =========================== -->
+      <section class="dashboard-page hidden" data-page="storage" aria-label="Armazenamento">
+        <div class="page-heading"><div><span class="section-kicker">SHADOW // STORAGE</span><h1>Armazenamento</h1><p>Espaço livre nas unidades acessíveis deste computador.</p></div><span class="dashboard-live-label">LEITURA LOCAL</span></div>
+        <section class="tools-grid">
+          <article id="storage-section" class="panel tool-panel">
+            <div class="panel-heading"><div><span class="section-kicker">ARMAZENAMENTO</span><h2>Espaço em disco</h2><p>Unidades acessíveis neste computador</p></div></div>
+            <ul id="disk-list" class="tool-list"><li class="empty-state">Aguardando análise.</li></ul>
+          </article>
+        </section>
+      </section>
+
+      <!-- ============================== LIMPEZA ============================== -->
+      <section class="dashboard-page hidden" data-page="cleanup" aria-label="Limpeza">
+        <div class="page-heading"><div><span class="section-kicker">SHADOW // CLEANUP</span><h1>Limpeza segura</h1><p>Prévia limitada à pasta TEMP da sua conta, com no mínimo 7 dias.</p></div><span class="dashboard-live-label">CONFIRMAÇÃO OBRIGATÓRIA</span></div>
+        <section class="tools-grid">
+          <article id="cleanup-section" class="panel tool-panel">
+            <div class="panel-heading"><div><span class="section-kicker">LIMPEZA SEGURA</span><h2>Arquivos temporários</h2><p id="cleanup-summary">Prévia limitada à pasta TEMP da sua conta.</p></div></div>
+            <ul id="cleanup-files" class="tool-list"><li class="empty-state">Aguardando análise.</li></ul>
+            <button id="cleanup-button" class="tool-action-button" type="button" disabled>Limpar temporários antigos</button>
+          </article>
+        </section>
+      </section>
+
+      <!-- ============================ INICIALIZAÇÃO ========================== -->
+      <section class="dashboard-page hidden" data-page="startup" aria-label="Inicialização">
+        <div class="page-heading"><div><span class="section-kicker">SHADOW // STARTUP</span><h1>Inicialização</h1><p>Aplicativos que abrem junto com a sua conta do Windows.</p></div><span class="dashboard-live-label">REVERSÍVEL</span></div>
+        <section class="tools-grid">
+          <article id="startup-section" class="panel tool-panel">
+            <div class="panel-heading"><div><span class="section-kicker">WINDOWS</span><h2>Inicialização</h2><p id="startup-scope">Aplicativos iniciados ao entrar na sua conta</p></div></div>
+            <ul id="startup-list" class="tool-list"><li class="empty-state">Aguardando análise.</li></ul>
+          </article>
+        </section>
+      </section>
+
+      <!-- =============================== ENERGIA ============================= -->
+      <section class="dashboard-page hidden" data-page="power" aria-label="Energia">
+        <div class="page-heading"><div><span class="section-kicker">SHADOW // POWER</span><h1>Plano de energia</h1><p>O plano atual não garante aumento de FPS.</p></div><span class="dashboard-live-label">WINDOWS POWERCFG</span></div>
+        <section class="tools-grid">
+          <article id="power-section" class="panel tool-panel">
+            <div class="panel-heading"><div><span class="section-kicker">ENERGIA</span><h2>Plano de energia</h2><p id="power-description">O plano atual não garante aumento de FPS.</p></div></div>
+            <select id="power-plan-select" class="tool-select" aria-label="Plano de energia" disabled></select>
+            <button id="power-plan-button" class="tool-action-button" type="button" disabled>Ativar plano escolhido</button>
+          </article>
+        </section>
+      </section>
+
+      <!-- ============================= DIAGNÓSTICO =========================== -->
+      <section class="dashboard-page hidden" data-page="diagnostics" aria-label="Diagnóstico completo">
+        <div class="page-heading"><div><span class="section-kicker">SHADOW // DIAGNOSTICS</span><h1>Diagnóstico completo</h1><p>Hardware identificado, evidências observadas e próximos passos.</p></div><span id="diagnostic-count" class="dashboard-live-label">Aguardando análise</span></div>
+        <section class="diagnostics-grid">
+          <article class="panel hardware-panel">
+            <div class="panel-heading"><div><span class="section-kicker">INVENTÁRIO</span><h2>Hardware e sistema</h2><p>Dados identificados neste computador</p></div></div>
+            <ul id="system-info-list" class="system-info-list"><li class="empty-state">Aguardando análise.</li></ul>
+          </article>
+          <article class="panel findings-panel">
+            <div class="panel-heading"><div><span class="section-kicker">EVIDÊNCIAS</span><h2>Problemas e sugestões</h2><p>Gravidade baseada somente nas leituras disponíveis</p></div></div>
+            <ul id="finding-list" class="finding-list"><li class="empty-state">Aguardando análise.</li></ul>
+          </article>
+        </section>
+      </section>
+
+      <!-- ============================= GAMING HUB ============================ -->
+      <section class="dashboard-page hidden" data-page="games" aria-label="Gaming Hub">
+        <div class="page-heading"><div><span class="section-kicker">SHADOW // GAMING HUB</span><h1>Central de jogos</h1><p>Biblioteca detectada, preferências e preparação segura para jogar.</p></div><button id="games-refresh-button" class="secondary-button" type="button">↻ Atualizar biblioteca</button></div>
+        <div class="gaming-grid">
+          <article class="panel games-library-panel">
+            <div class="panel-heading"><div><span class="section-kicker">BIBLIOTECA</span><h2>Jogos instalados</h2><p id="games-library-message">Lendo manifestos conhecidos do Steam e Epic Games.</p></div><span id="games-count" class="level-badge">—</span></div>
+            <label class="gaming-label" for="game-select">Selecione um jogo</label>
+            <select id="game-select" class="tool-select" aria-label="Jogo instalado" disabled><option value="">Aguardando biblioteca</option></select>
+            <div id="selected-game-card" class="selected-game-card"><span class="game-icon"><svg class="icon"><use href="#icon-games"></use></svg></span><div><strong>Nenhum jogo selecionado</strong><small>Os jogos encontrados aparecerão aqui.</small></div></div>
+            <p class="gaming-path" id="selected-game-path"></p>
+          </article>
+          <article class="panel game-profile-panel">
+            <div class="panel-heading"><div><span class="section-kicker">PREFERÊNCIA DO SHADOW</span><h2>Perfil por jogo</h2><p>Um lembrete salvo no Shadow; não muda opções do jogo ou do Windows.</p></div></div>
+            <label class="gaming-label" for="game-profile-select">Preferência</label>
+            <select id="game-profile-select" class="tool-select" disabled>
+              <option value="balanced">Equilibrado</option><option value="performance">Priorizar desempenho</option><option value="quality">Priorizar qualidade visual</option>
+            </select>
+            <button id="save-game-profile-button" class="tool-action-button" type="button" disabled>Salvar preferência</button>
+            <p id="game-profile-status" class="gaming-note">Nenhuma preferência salva para este jogo.</p>
+          </article>
+        </div>
+        <section class="gaming-grid">
+          <article class="panel game-guidance-panel">
+            <div class="panel-heading"><div><span class="section-kicker">SUGESTÕES POR HARDWARE</span><h2>Antes de ajustar o jogo</h2><p>Baseado nos dados que o Shadow conseguiu identificar. Confira os requisitos oficiais.</p></div></div>
+            <ul id="game-guidance-list" class="finding-list"><li class="empty-state">Selecione um jogo após a análise do PC.</li></ul>
+          </article>
+          <article class="panel game-preparation-panel">
+            <div class="panel-heading"><div><span class="section-kicker">PREPARAÇÃO MANUAL</span><h2>Checklist antes de jogar</h2><p>O Shadow não fecha aplicativos nem aplica mudanças automaticamente.</p></div></div>
+            <ul class="game-checklist">
+              <li><label><input type="checkbox"> Salvei o que estava aberto e fechei somente o que não vou usar.</label></li>
+              <li><label><input type="checkbox"> Conferi espaço livre no disco e atualizações pendentes do jogo.</label></li>
+              <li><label><input type="checkbox"> Revisei o plano de energia, se estou usando notebook.</label></li>
+            </ul>
+            <div class="game-preparation-actions"><button type="button" class="secondary-button" data-open-page="processes">Revisar processos</button><button type="button" class="secondary-button" data-open-page="power">Ver energia</button><button id="game-live-button" type="button" class="secondary-button">Monitorar ao vivo</button></div>
+            <label class="gaming-label" for="game-prep-power">Plano de energia para este jogo</label>
+            <select id="game-prep-power" class="tool-select"><option value="keep">Manter plano atual</option></select>
+            <div class="game-preparation-actions"><button id="game-prep-save" type="button" class="secondary-button" disabled>Salvar preparação</button><button id="game-prep-apply" type="button" class="secondary-button" disabled>Revisar e aplicar</button><button id="game-prep-restore" type="button" class="secondary-button" disabled>Restaurar plano anterior</button></div>
+            <p id="game-prep-status" class="gaming-note">Selecione um jogo. A restauração também permanece disponível após reabrir o Shadow.</p>
+          </article>
+        </section>
+        <article class="panel game-history-panel">
+          <div class="panel-heading"><div><span class="section-kicker">HISTÓRICO LOCAL</span><h2>Perfis salvos no Shadow</h2><p>Mostra preferências registradas aqui, não alterações feitas dentro dos jogos.</p></div></div>
+          <ul id="game-profile-history" class="tool-list"><li class="empty-state">Nenhum perfil salvo ainda.</li></ul>
+        </article>
+      </section>
+
+      <!-- =========================== PERFORMANCE LAB ========================= -->
+      <section class="dashboard-page hidden" data-page="performance" aria-label="Performance Lab">
+        <div class="page-heading"><div><span class="section-kicker">SHADOW // PERFORMANCE LAB</span><h1>Laboratório de desempenho</h1><p>Compare capturas reais do mesmo jogo e configuração.</p></div><span class="dashboard-live-label"><i></i> SEM GANHOS PROMETIDOS</span></div>
+        <article class="panel performance-intro">
+          <div class="panel-heading"><div><span class="section-kicker">COMO MEDIR</span><h2>Uma comparação justa</h2><p>Use a mesma cena, duração, resolução e condições. Para FPS e frametimes, rode uma captura no CapFrameX ou PresentMon e importe o CSV bruto. CPU/RAM/GPU cobrem a sessão inteira e não são sincronizadas quadro a quadro com o CSV. O Shadow não inicia o jogo nem esses programas.</p></div></div>
+          <div class="performance-workflow"><span><b>01</b> Inicie o monitoramento</span><i>→</i><span><b>02</b> Capture o jogo</span><i>→</i><span><b>03</b> Finalize e importe</span></div>
+          <p class="gaming-note">O 1% low é a média de FPS do 1% de frames mais lentos; fica indisponível com menos de 100 frames válidos.</p>
+          <p id="performance-gpu-note" class="gaming-note">GPU: verificando suporte…</p>
+        </article>
+        <section class="performance-grid">
+          <article class="panel performance-session-panel">
+            <div class="panel-heading"><div><span class="section-kicker">SESSÃO DO SISTEMA</span><h2>CPU, GPU e memória</h2><p>Coleta enquanto o monitoramento estiver ativo; as amostras são salvas com o resultado.</p></div><span id="performance-session-status" class="live-badge paused"><i></i> PARADO</span></div>
+            <div class="performance-session-controls"><button id="performance-start-button" class="tool-action-button" type="button">Iniciar monitoramento</button><button id="performance-stop-button" class="secondary-button" type="button" disabled>Finalizar sessão</button><button id="performance-discard-button" class="secondary-button" type="button" disabled>Descartar sessão</button><span id="performance-duration">00:00</span></div>
+            <div class="performance-chart-wrap"><canvas id="performance-chart" aria-label="Uso medido de CPU, GPU e RAM durante a sessão"></canvas></div>
+            <div class="performance-legend"><span><i class="perf-cpu"></i> CPU</span><span><i class="perf-gpu"></i> GPU</span><span><i class="perf-ram"></i> RAM</span></div>
+          </article>
+          <article class="panel performance-import-panel">
+            <div class="panel-heading"><div><span class="section-kicker">CAPTURA DE FPS</span><h2>Registrar resultado</h2><p>Importe CSV de frametimes após finalizar a sessão do sistema.</p></div></div>
+            <label class="gaming-label" for="performance-game-select">Jogo detectado</label>
+            <select id="performance-game-select" class="tool-select" disabled><option value="">Atualize a biblioteca no Gaming Hub</option></select>
+            <label class="gaming-label" for="performance-phase-select">Etapa da comparação</label>
+            <select id="performance-phase-select" class="tool-select"><option value="before">Antes do ajuste</option><option value="after">Depois do ajuste</option><option value="custom">Outra configuração</option></select>
+            <label class="gaming-label" for="performance-config-label">Rótulo da configuração</label>
+            <input id="performance-config-label" class="performance-text-input" type="text" maxlength="100" placeholder="Ex.: padrão / sombras no médio">
+            <button id="performance-import-button" class="secondary-button" type="button" disabled>Escolher CSV de FPS…</button>
+            <div id="performance-capture-preview" class="performance-capture-preview">Nenhum CSV selecionado.</div>
+            <button id="performance-save-button" class="tool-action-button" type="button" disabled>Salvar medição</button>
+            <p id="performance-import-note" class="gaming-note">Finalize uma sessão com pelo menos uma amostra e selecione um jogo detectado.</p>
+          </article>
+        </section>
+        <section class="performance-grid">
+          <article class="panel performance-compare-panel">
+            <div class="panel-heading"><div><span class="section-kicker">COMPARAR MEDIÇÕES</span><h2>Comparar configurações</h2><p>Escolha duas medições do mesmo jogo. Diferenças são descritivas e não provam que um ajuste causou a variação.</p></div></div>
+            <label class="gaming-label" for="performance-compare-select">Jogo</label>
+            <select id="performance-compare-select" class="tool-select" disabled><option value="">Sem medições salvas</option></select>
+            <div class="performance-pair-selects"><label class="gaming-label" for="performance-left-select">Medição A<select id="performance-left-select" class="tool-select" disabled></select></label><label class="gaming-label" for="performance-right-select">Medição B<select id="performance-right-select" class="tool-select" disabled></select></label></div>
+            <div id="performance-comparison" class="performance-comparison"><p class="empty-state">Salve uma medição antes e outra depois para comparar.</p></div>
+          </article>
+          <article class="panel performance-history-panel">
+            <div class="panel-heading"><div><span class="section-kicker">HISTÓRICO LOCAL</span><h2>Resultados salvos</h2><p>Armazenados localmente neste usuário.</p></div></div>
+            <ul id="performance-history-list" class="tool-list"><li class="empty-state">Nenhuma medição salva ainda.</li></ul>
+          </article>
+        </section>
+      </section>
+
+      <!-- ============================= NETWORK LAB =========================== -->
+      <section class="dashboard-page hidden" data-page="network" aria-label="Network Lab">
+        <div class="page-heading"><div><span class="section-kicker">SHADOW // NETWORK LAB</span><h1>Laboratório de rede</h1><p>Leituras locais de conexão e respostas ao destino que você escolher.</p></div><button id="network-refresh-button" class="secondary-button" type="button">↻ Atualizar adaptadores</button></div>
+        <article class="panel network-test-panel">
+          <div class="panel-heading"><div><span class="section-kicker">TESTE ICMP</span><h2>Latência e perda de pacotes</h2><p>Envia quatro sondas ao gateway e ao destino. Digite um IP ou domínio, sem http:// ou caminho.</p></div></div>
+          <div class="network-test-controls"><label for="network-target-input">Destino para teste</label><input id="network-target-input" class="performance-text-input" type="text" value="1.1.1.1" maxlength="253" placeholder="IP ou domínio"><button id="network-test-button" class="tool-action-button" type="button">Testar conexão</button></div>
+          <p class="network-caveat">Alguns servidores bloqueiam ping. Uma leitura curta não representa toda a rota nem garante o ping dentro do jogo.</p>
+          <div id="network-test-status" class="gaming-note">Faça um teste para ver os resultados medidos.</div>
+        </article>
+        <section id="network-results" class="network-results-grid hidden" aria-label="Resultados do teste">
+          <article id="network-target-result" class="panel network-result-card"></article>
+          <article id="network-gateway-result" class="panel network-result-card"></article>
+        </section>
+        <section class="network-grid">
+          <article class="panel network-adapters-panel">
+            <div class="panel-heading"><div><span class="section-kicker">CONEXÃO LOCAL</span><h2>Adaptadores de rede</h2><p id="network-adapter-summary">Carregando estado das interfaces.</p></div></div>
+            <ul id="network-adapter-list" class="network-adapter-list"><li class="empty-state">Aguardando leitura.</li></ul>
+          </article>
+          <article class="panel network-diagnosis-panel">
+            <div class="panel-heading"><div><span class="section-kicker">LEITURA BÁSICA</span><h2>Possíveis causas e próximos passos</h2><p>As sugestões não alteram o roteador, DNS ou configurações de rede.</p></div></div>
+            <ul id="network-diagnosis-list" class="finding-list"><li class="empty-state">Execute um teste para ver a leitura.</li></ul>
+          </article>
+        </section>
+      </section>
+
+      <!-- ============================== HISTÓRICO ============================ -->
+      <section class="dashboard-page hidden" data-page="history" aria-label="Histórico e restauração">
+        <div class="page-heading"><div><span class="section-kicker">SHADOW // HISTÓRICO LOCAL</span><h1>Histórico e restauração</h1><p>Reveja análises e ações feitas pelo Shadow neste usuário.</p></div><button id="history-refresh-button" class="secondary-button" type="button">↻ Atualizar histórico</button></div>
+        <article class="panel history-notice-panel"><div class="panel-heading"><div><span class="section-kicker">RESTAURAÇÃO SEGURA</span><h2>O que pode ser desfeito</h2><p>Inicialização e plano de energia podem voltar ao estado anterior se nada tiver mudado desde então. Limpeza e encerramento de aplicativos não podem ser revertidos. O Shadow mantém histórico local, mas não cria ponto de restauração do Windows.</p></div></div></article>
+        <section class="panel history-comparison-panel">
+          <div class="panel-heading"><div><span class="section-kicker">COMPARAÇÃO DESCRITIVA</span><h2>Análise recente × anterior</h2><p>Diferenças entre leituras curtas; não provam que uma ação causou a mudança.</p></div></div>
+          <div id="history-comparison" class="history-comparison"><p class="empty-state">Faça pelo menos duas análises para comparar.</p></div>
+        </section>
+        <section class="history-grid">
+          <article class="panel history-diagnostics-panel"><div class="panel-heading"><div><span class="section-kicker">DIAGNÓSTICOS</span><h2>Análises recentes</h2><p id="history-diagnostics-caption">Até 30 registros, neste computador.</p></div></div><ul id="diagnostic-history-list" class="history-list"><li class="empty-state">Nenhuma análise salva ainda.</li></ul></article>
+          <article class="panel history-actions-panel"><div class="panel-heading"><div><span class="section-kicker">ALTERAÇÕES DO SHADOW</span><h2>Ações registradas</h2><p>Até 100 ações. Itens restauráveis exibem um botão para desfazer.</p></div></div><ul id="action-history-list" class="history-list"><li class="empty-state">Nenhuma ação salva ainda.</li></ul></article>
+        </section>
+      </section>
+
+      <!-- ============================ CONFIGURAÇÕES ========================== -->
+      <section class="dashboard-page hidden" data-page="settings" aria-label="Configurações e compatibilidade">
+        <div class="page-heading"><div><span class="section-kicker">SHADOW // CONFIGURAÇÕES</span><h1>Compatibilidade e configurações</h1><p>Veja o que está disponível neste sistema e controle como o Shadow inicia.</p></div><button id="settings-refresh-button" class="secondary-button" type="button">↻ Atualizar</button></div>
+        <article class="panel preferences-panel">
+          <div class="panel-heading"><div><span class="section-kicker">CONSUMO DO SHADOW</span><h2>Modo leve e aparência</h2><p>Escolha a frequência das leituras e a intensidade dos efeitos.</p></div></div>
+          <form id="preferences-form" class="preferences-fields">
+            <label><input id="pref-lightweight" type="checkbox"> Modo leve (mínimo de 3 segundos, menos efeitos)</label>
+            <label>Intervalo das leituras <select id="pref-interval" class="tool-select"><option value="1">1 segundo</option><option value="3">3 segundos</option><option value="5">5 segundos</option></select></label>
+            <label>Efeitos visuais <select id="pref-effects" class="tool-select"><option value="full">Completos</option><option value="reduced">Reduzidos</option><option value="off">Desligados</option></select></label>
+            <label><input id="pref-intro" type="checkbox" checked> Mostrar apresentação ao abrir</label>
+            <button type="submit" class="secondary-button">Salvar preferências</button>
+          </form>
+          <p id="preferences-status" class="settings-note"></p>
+          <p id="shadow-consumption" class="settings-note">Consumo: aguardando leitura.</p>
+        </article>
+        <section class="settings-grid">
+          <article class="panel compatibility-panel">
+            <div class="panel-heading"><div><span class="section-kicker">SISTEMA DETECTADO</span><h2 id="compatibility-name">Verificando sistema…</h2><p id="compatibility-summary">Lendo plataforma e compatibilidade.</p></div><span id="compatibility-badge" class="level-badge">—</span></div>
+            <div class="compatibility-meta"><span>Alvo do projeto <strong id="compatibility-target">Windows 10 e Windows 11</strong></span><span>Modo <strong id="compatibility-mode">—</strong></span><span>Build <strong id="compatibility-build">—</strong></span></div>
+            <ul id="capability-list" class="capability-list"><li class="empty-state">Aguardando leitura.</li></ul>
+          </article>
+          <article class="panel app-settings-panel">
+            <div class="panel-heading"><div><span class="section-kicker">INICIALIZAÇÃO</span><h2>Iniciar com o Windows</h2><p>Executa o Shadow ao entrar na sua conta. Não exige administrador e pode ser desligado aqui.</p></div></div>
+            <div class="startup-setting-row"><div><strong id="launch-at-login-state">Verificando…</strong><small id="launch-at-login-help">Disponível no Shadow.exe para Windows.</small></div><button id="launch-at-login-button" class="tool-action-button" type="button" disabled>Ativar inicialização</button></div>
+            <p class="settings-note">Essa opção só grava ou remove a entrada “Shadow” da inicialização da sua conta. No modo de desenvolvimento não fica habilitada.</p>
+          </article>
+        </section>
+        <article class="panel error-log-panel">
+          <div class="panel-heading"><div><span class="section-kicker">SUPORTE E DIAGNÓSTICO</span><h2>Log de erros local</h2><p>Erros não tratados e falhas da interface ficam neste computador, com tamanho limitado. Não é enviado pela internet.</p></div><div class="error-log-actions"><button id="error-log-refresh-button" class="secondary-button" type="button">Ler log</button><button id="error-log-clear-button" class="secondary-button" type="button" disabled>Limpar log</button></div></div>
+          <div class="error-log-meta"><span id="error-log-path">Local do arquivo: verificando…</span><span id="error-log-size">0 bytes</span></div>
+          <pre id="error-log-content" class="error-log-content">Clique em “Ler log” para visualizar os erros registrados.</pre>
+        </article>
+      </section>
+
+      <footer class="dashboard-footer"><span id="platform-note">Análise informativa; não mede FPS de jogos.</span><span class="footer-signature">SHADOW <i>•</i> PRIVACIDADE LOCAL <b>V4.0</b></span></footer>
+    </div>
+  </main>
+
+  <!-- ============================== SCANNER =============================== -->
+  <div id="loading-overlay" class="loading-overlay hidden" role="status" aria-live="polite" aria-busy="false">
+    <div class="scan-aura" aria-hidden="true"></div>
+    <div class="scan-dialog">
+      <div class="scan-brand-mark" aria-hidden="true"><span>S</span><i></i></div>
+      <span class="section-kicker">SHADOW // ANÁLISE DO SISTEMA</span>
+      <strong>Analisando seu PC</strong>
+      <p id="scan-current-step">Aguardando início da análise…</p>
+      <div class="loader-orbit" aria-hidden="true"><span></span><i></i></div>
+      <ol id="scan-stage-list" class="scan-stage-list" aria-label="Etapas do diagnóstico">
+        <li data-scan-stage="Preparando leitura"><i></i><span>Preparando leitura</span></li>
+        <li data-scan-stage="Identificando sistema e hardware"><i></i><span>Identificando sistema e hardware</span></li>
+        <li data-scan-stage="Analisando memória e processos"><i></i><span>Analisando memória e processos</span></li>
+        <li data-scan-stage="Amostrando CPU e RAM por 5 segundos"><i></i><span>Amostrando CPU e RAM por 5 segundos</span></li>
+        <li data-scan-stage="Consolidando o relatório"><i></i><span>Consolidando o relatório</span></li>
+        <li data-scan-stage="Carregando recursos do painel"><i></i><span>Carregando recursos do painel</span></li>
+      </ol>
+      <small class="scan-honesty-note">Sem porcentagem estimada: as etapas avançam quando cada leitura termina.</small>
+    </div>
+  </div>
+
+  <dialog id="score-method-dialog" class="score-dialog" aria-labelledby="score-dialog-title">
+    <div class="score-dialog-content">
+      <span class="section-kicker">TRANSPARÊNCIA</span>
+      <h2 id="score-dialog-title">Como calculamos a folga</h2>
+      <p>Este indicador resume a disponibilidade observada durante os cinco segundos da análise. Ele não mede a potência do hardware nem prevê FPS.</p>
+      <div class="formula-card"><strong>100 − (CPU média × 0,4 + RAM média × 0,6)</strong><small>O resultado é arredondado e limitado entre 0 e 100.</small></div>
+      <p>A CPU e a memória recebem pesos diferentes para destacar a pressão de RAM. O valor muda conforme os programas abertos e serve apenas como um retrato daquele momento.</p>
+      <button id="score-dialog-close" class="secondary-button" type="button">Fechar</button>
+    </div>
+  </dialog>
+
+  <div id="error-toast" class="error-toast hidden" role="alert"></div>
+  <script src="app.js"></script>
+</body>
+</html>
